@@ -1,0 +1,21 @@
+# .gitignore
+
+# node modules
+node_modules/
+
+# ambiente
+.env
+
+# logs
+*.log
+
+# sistema
+.DS_Store
+Thumbs.db
+
+# arquivos do editor
+.vscode/
+.idea/
+
+# build temporário
+dist/
