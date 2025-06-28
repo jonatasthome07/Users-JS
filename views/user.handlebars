@@ -1,0 +1,10 @@
+<p>Nome: {{user.name}}</p>
+<p>Profissão: {{user.occupation}}</p>
+<h2>Endereços:</h2>
+
+{{#each user.Addresses}}
+  <p> {{this.id}} - Rua: {{this.street}}</p>
+  <p>Número: {{this.number}}</p>
+  <p>Cidade: {{this.city}}</p>
+  <input type="submit" value="Excluir endereço">
+{{/each}}

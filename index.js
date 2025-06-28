@@ -57,6 +57,12 @@ app.post("/address/create", async (req,res)=>{
     res.redirect("/allusers")
 })
 
+app.get("/user/:id", async (req,res)=>{
+    const id = req.params.id
+    const user = await User.findOne({include:Address,where:{id:id}})
+    res.render("user", {user: user.get({plain:true})})
+})
+
 app.get("/adduser", async (req,res)=>{
     res.render("adduser")
 })
