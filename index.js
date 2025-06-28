@@ -13,6 +13,21 @@ app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+app.post("/adduser", async(req,res)=>{
+    const name = req.body.name
+    const occupation = req.body.occupation
+    const user = {name, occupation}
+
+    await User.create(user)
+    res.redirect("/")
+})
+
+app.get("/allusers", async (req,res)=>{
+    const users = await User.findAll({raw:true})
+    console.log(users)
+    res.render("allusers", {users})
+})
+
 app.get("/adduser", async (req,res)=>{
     res.render("adduser")
 })
