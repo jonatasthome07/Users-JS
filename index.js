@@ -1,3 +1,4 @@
+//Imports
 require("dotenv").config()
 const express = require("express")
 const app = express();
@@ -6,21 +7,21 @@ const User = require("./models/User")
 const exphbs = require("express-handlebars")
 const Address = require("./models/Address");
 
-
+//Configurações e middleware
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")
-
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+//Rotas
 app.post("/adduser", async(req,res)=>{
     const name = req.body.name
     const occupation = req.body.occupation
     const user = {name, occupation}
 
     await User.create(user)
-    res.redirect("/")
+    res.redirect("/allusers")
 })
 
 app.get("/allusers", async (req,res)=>{
@@ -42,7 +43,18 @@ app.post("/edit/user/:id", async (req,res)=>{
 
     const user = {name, occupation}
     await User.update(user, {where:{id:id}})
-    res.redirect("/")
+    res.redirect("/allusers")
+})
+
+app.post("/address/create", async (req,res)=>{
+    const UserId = req.body.UserId
+    const street = req.body.street
+    const number = req.body.number
+    const city = req.body.city
+
+    const address = {UserId, street, number, city}
+    await Address.create(address)
+    res.redirect("/allusers")
 })
 
 app.get("/adduser", async (req,res)=>{
@@ -53,6 +65,7 @@ app.get("/", async(req,res)=>{
     res.render("home")
 })
 
+//Conexão com banco
 conn.sync()
 .then(()=>{
     app.listen(process.env.PORT)
