@@ -6,5 +6,9 @@
   <p> {{this.id}} - Rua: {{this.street}}</p>
   <p>Número: {{this.number}}</p>
   <p>Cidade: {{this.city}}</p>
-  <input type="submit" value="Excluir endereço">
+  <form action="/address/delete" method="post">
+    <input type="hidden" name="UserId" value="{{this.UserId}}">
+    <input type="hidden" name="id" value="{{this.id}}">
+    <input type="submit" value="Excluir endereço">
+  </form>
 {{/each}}

@@ -63,6 +63,13 @@ app.get("/user/:id", async (req,res)=>{
     res.render("user", {user: user.get({plain:true})})
 })
 
+app.post("/address/delete", async (req,res)=>{
+    const userId = req.body.UserId
+    const id = req.body.id
+    await Address.destroy({where:{id:id}})
+    res.redirect(`/user/${userId}`)
+})
+
 app.get("/adduser", async (req,res)=>{
     res.render("adduser")
 })
