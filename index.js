@@ -13,6 +13,10 @@ app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+app.get("/adduser", async (req,res)=>{
+    res.render("adduser")
+})
+
 app.get("/", async(req,res)=>{
     res.render("home")
 })
