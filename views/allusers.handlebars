@@ -1,6 +1,7 @@
+<h1>Usuários</h1>
 {{#each users}}
-<p>Nome: {{this.name}}</p>
-<p>Profissão: {{this.occupation}}</p>
-<a href="/edit/user/{{this.id}}">Editar cadastro</a>
-<a href="/user/{{this.id}}">Detalhes do usuário</a>
+<p id="name">Nome: {{this.name}}</p>
+<p id="occupation">Profissão: {{this.occupation}}</p>
+<a href="/edit/user/{{this.id}}" class="changes">Editar cadastro</a>
+<a href="/user/{{this.id}}" id="details" class="changes">Detalhes do usuário</a>
 {{/each}}

@@ -1,0 +1,44 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+.options{
+    display: flex;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+li{
+    list-style: none;
+}
+
+#name{
+    margin-top: 40px;
+}
+
+#details{
+    margin-left: 10px;
+}
+
+.changes{
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid black;
+    color: black;
+    padding: 3px;
+    transition: 1s;
+}
+
+.changes:hover{
+    background-color: black;
+    color: white;
+}
+
+input{
+    padding: 5px;
+    margin-top: 5px;
+}

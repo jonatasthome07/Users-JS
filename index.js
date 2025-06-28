@@ -25,7 +25,7 @@ app.post("/adduser", async(req,res)=>{
     res.redirect("/allusers")
 })
 
-app.get("/allusers", async (req,res)=>{
+app.get("/", async (req,res)=>{
     const users = await User.findAll({raw:true})
     console.log(users)
     res.render("allusers", {users})
@@ -92,10 +92,6 @@ app.post("/address/update/:id", async (req,res)=>{
 
 app.get("/adduser", async (req,res)=>{
     res.render("adduser")
-})
-
-app.get("/", async(req,res)=>{
-    res.render("home")
 })
 
 //Conexão com banco
