@@ -4,7 +4,9 @@ const app = express();
 const conn = require("./db/conn")
 const User = require("./models/User")
 const exphbs = require("express-handlebars")
-const Address = require("./models/Address")
+const Address = require("./models/Address");
+const { raw } = require("mysql2");
+const { where } = require("sequelize");
 
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")
@@ -26,6 +28,12 @@ app.get("/allusers", async (req,res)=>{
     const users = await User.findAll({raw:true})
     console.log(users)
     res.render("allusers", {users})
+})
+
+app.get("/edit/user/:id", async (req,res)=>{
+    const id = req.params.id
+    const user = await User.findOne({raw:true, where:{id:id}})
+    res.render("edituser", {user})
 })
 
 app.get("/adduser", async (req,res)=>{
