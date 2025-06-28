@@ -6,6 +6,7 @@ const conn = require("./db/conn")
 const User = require("./models/User")
 const exphbs = require("express-handlebars")
 const Address = require("./models/Address");
+const { where } = require("sequelize");
 
 //Configurações e middleware
 app.engine("handlebars", exphbs.engine())
@@ -68,6 +69,25 @@ app.post("/address/delete", async (req,res)=>{
     const id = req.body.id
     await Address.destroy({where:{id:id}})
     res.redirect(`/user/${userId}`)
+})
+
+app.get("/address/update/:id", async (req,res)=>{
+    const id = req.params.id
+    const address = await Address.findOne({raw:true, where:{id:id}})
+    res.render("editaddress", {address})
+})
+
+app.post("/address/update/:id", async (req,res)=>{
+    const id = req.params.id
+    const userId = req.body.UserId
+    const street = req.body.street
+    const number = req.body.number
+    const city = req.body.city
+
+    const address = {street, number, city}
+    await Address.update(address, {where:{id:id}})
+    res.redirect(`/user/${userId}`)
+    
 })
 
 app.get("/adduser", async (req,res)=>{
